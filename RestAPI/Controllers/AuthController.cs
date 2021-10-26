@@ -1,13 +1,14 @@
-﻿using Contracts.Models.Request;
+﻿
+using Contracts.Models.Request;
 using Contracts.Models.Response;
 using Domain.Clients.Firebase;
 using Microsoft.AspNetCore.Mvc;
 using Persistence.Models;
 using Persistence.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using SignUpRequest = Contracts.Models.Request.SignUpRequest;
+using SignUpResponse = Contracts.Models.Response.SignUpResponse;
 
 namespace RestAPI.Controllers
 {
@@ -52,9 +53,18 @@ namespace RestAPI.Controllers
 
         [HttpPost]
         [Route("signIn")]
-        public async IActionResult SignIn()
-        { 
-            
-        }
+        public async Task<ActionResult<SignInResponse>> SignIn(SignInRequest request)
+        {
+            var user = await _firebaseClient.SignInAsync(request.Email, request.Password);
+
+            var userReadModel = _userRepository.GetAsync(user.FirebaseId);
+
+            return new SignInResponse
+            {
+                UserName = null,
+                IdToken = user.IdToken,
+                Email = user.Email
+            };
+        } 
     }
 }

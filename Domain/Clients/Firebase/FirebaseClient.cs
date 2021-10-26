@@ -1,7 +1,6 @@
 ﻿using Domain.Clients.Firebase.Models;
 using Domain.Clients.Firebase.Options;
 using Microsoft.Extensions.Options;
-using System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -19,14 +18,22 @@ namespace Domain.Clients.Firebase
             _firebaseOptions = firebaseOptions.Value;
         }
 
-        public Task<SignInResponse> SignInAsync(string email, string password)
+        public async Task<SignInResponse> SignInAsync(string email, string password)
         {
-           
+            var url = $"{_firebaseOptions.BaseAddress}/v1/accounts:signUp?key={_firebaseOptions.ApiKey}";
+
+            var request = new SignInRequest
+            {
+                Email = email,
+                Password = password
+            };
+            var response = await _httpClient.PostAsJsonAsync(url, request);
+            return await response.Content.ReadFromJsonAsync<SignInResponse>();
         }
 
         public async Task<SignUpResponse> SignUpAsync(string email, string password)
         {
-             var url = $"{_firebaseOptions.BaseAddress}/v1/accounts:signUp?key={_firebaseOptions.ApiKey}";
+             var url = $"{_firebaseOptions.BaseAddress}/v1/accounts:signInWithPassword?key={_firebaseOptions.ApiKey}";
 
             var request = new SignUpRequest
             {

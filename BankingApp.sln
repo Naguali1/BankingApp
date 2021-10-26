@@ -8,8 +8,17 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{4B98AA14-C265-4E48-A27F-DE549040C50D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{A36DF00B-EFE2-4990-B4B7-318949B0FC81}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4B98AA14-C265-4E48-A27F-DE549040C50D} = {4B98AA14-C265-4E48-A27F-DE549040C50D}
+		{581AE11C-C706-4DE8-A4C2-47B49FD3A8FD} = {581AE11C-C706-4DE8-A4C2-47B49FD3A8FD}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{581AE11C-C706-4DE8-A4C2-47B49FD3A8FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C9085C53-3E66-494B-B4EC-C7CA11346D8B}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

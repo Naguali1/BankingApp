@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Persistence.Models
+namespace Contracts.Models.Response
 {
-    public class UserReadModel
+    public class SignInResponse
     {
-        public Guid UserId { get; set; }
-        public string FirebaseId { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
-        public DateTime DateCreated { get; set; }
+        public string IdToken { get; set; }
     }
 }
- 

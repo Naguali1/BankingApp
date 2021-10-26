@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Persistence.Repositories
 {
-    interface IAccountRepository
+    public interface IAccountRepository
     {
         Task<int> SaveOrUpdateAsync(AccountReadModel accountModel);
 

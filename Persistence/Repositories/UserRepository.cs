@@ -20,13 +20,19 @@ namespace Persistence.Repositories
 
         public Task<UserReadModel> GetAsync(string firebaseId)
         {
-            throw new System.NotImplementedException();
+            var sql = $"SELECT * FROM {TableName} WHERE FirebaseId = @Firebase_Id";
+            return _sqlClient.QuerySingleOrDefaultAsync<UserReadModel>(sql, new
+            {
+                FirebaseId = firebaseId
+            });
         }
 
         public Task<int> SaveOrUpdateAsync(UserReadModel userModel)
         {
             var sql = $"INSERT INTO {TableName} (UserId, FirebaseId, UserName, Email, DateCreated) " +
                 $"VALUES (@User_Id, @Firebase_Id, @User_Name, @Email, @Date_Created)";
+            return _sqlClient.ExecuteAsync(sql, userModel);
         }
+       
     }
 }
